@@ -1,0 +1,546 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Studio Klayla | Art Portfolio</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #ffffff;
+  color: #333333;
+  font-family: Arial, sans-serif;
+}
+
+/* INTRODUCTION */
+
+header {
+  text-align: center;
+  padding: 65px 20px 50px;
+}
+
+header h1 {
+  font-family: Georgia, serif;
+  font-size: 40px;
+  font-weight: normal;
+  letter-spacing: 2px;
+  margin-bottom: 18px;
+}
+
+header p {
+  max-width: 650px;
+  margin: auto;
+  line-height: 1.8;
+  color: #666666;
+}
+
+/* NAVIGATION */
+
+nav {
+  text-align: center;
+  padding: 15px;
+  border-top: 1px solid #eeeeee;
+  border-bottom: 1px solid #eeeeee;
+}
+
+nav a {
+  color: #555555;
+  text-decoration: none;
+  margin: 0 18px;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+nav a:hover {
+  color: #999999;
+}
+
+/* GALLERY */
+
+.gallery-section {
+  max-width: 1400px;
+  margin: auto;
+  padding: 45px 25px 70px;
+}
+
+.gallery-section h2 {
+  text-align: center;
+  font-family: Georgia, serif;
+  font-weight: normal;
+  margin-bottom: 35px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.artwork {
+  cursor: pointer;
+  min-width: 0;
+}
+
+.cover {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #f2f2f2;
+}
+
+.cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s;
+}
+
+.artwork:hover .cover img {
+  transform: scale(1.04);
+}
+
+.description {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.artwork:hover .description,
+.artwork:focus-visible .description {
+  opacity: 1;
+}
+
+.description h3 {
+  font-family: Georgia, serif;
+  font-weight: normal;
+}
+
+.description p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.artwork-caption {
+  padding: 12px 2px;
+  font-family: Georgia, serif;
+  font-size: 16px;
+}
+
+/* IMAGE VIEWER */
+
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  color: white;
+  justify-content: center;
+  align-items: center;
+  padding: 55px 65px 25px;
+}
+
+.lightbox.active {
+  display: flex;
+}
+
+.viewer-content {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  min-height: 0;
+}
+
+.large-image {
+  max-width: 100%;
+  max-height: calc(100% - 115px);
+  object-fit: contain;
+  min-height: 0;
+}
+
+.viewer-title {
+  font-family: Georgia, serif;
+  font-size: 20px;
+  margin: 0;
+}
+
+.viewer-description {
+  font-size: 13px;
+  color: #cccccc;
+  margin: 0;
+  text-align: center;
+}
+
+.viewer-count {
+  font-size: 12px;
+  color: #cccccc;
+}
+
+.thumbnails {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.thumbnails img {
+  width: 55px;
+  height: 55px;
+  object-fit: cover;
+  cursor: pointer;
+  opacity: 0.55;
+  border: 2px solid transparent;
+}
+
+.thumbnails img.selected {
+  opacity: 1;
+  border-color: white;
+}
+
+.viewer-button {
+  position: absolute;
+  color: white;
+  background: none;
+  border: none;
+  font-size: 38px;
+  cursor: pointer;
+  padding: 12px;
+}
+
+.close {
+  top: 8px;
+  right: 20px;
+}
+
+.previous {
+  left: 12px;
+}
+
+.next {
+  right: 12px;
+}
+
+/* FOOTER */
+
+footer {
+  text-align: center;
+  padding: 35px;
+  border-top: 1px solid #eeeeee;
+  color: #888888;
+  font-size: 12px;
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+  header {
+    padding: 45px 20px;
+  }
+
+  header h1 {
+    font-size: 30px;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .gallery-section {
+    padding: 30px 12px;
+  }
+
+  nav a {
+    margin: 0 8px;
+    font-size: 11px;
+  }
+
+  .description {
+    display: none;
+  }
+
+  .lightbox {
+    padding: 55px 35px 20px;
+  }
+
+  .large-image {
+    max-width: 100%;
+  }
+
+  .previous {
+    left: 0;
+  }
+
+  .next {
+    right: 0;
+  }
+}
+
+@media (max-width: 380px) {
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Studio Klayla</h1>
+
+  <p>
+    Welcome to my art gallery. This is a collection
+    of my original artwork, exploring creativity,
+    colour, texture and inspiration.
+
+    Thank you for visiting and taking the time
+    to explore my work.
+  </p>
+</header>
+
+<nav>
+  <a href="index.html">HOME</a>
+  <a href="#gallery">ARTWORK</a>
+</nav>
+
+<section class="gallery-section" id="gallery">
+
+  <h2>Selected Artwork</h2>
+
+  <div class="gallery" id="artworkGallery"></div>
+
+</section>
+
+<div class="lightbox" id="lightbox"
+     role="dialog" aria-modal="true"
+     aria-label="Artwork viewer">
+
+  <button class="viewer-button close"
+          id="close" aria-label="Close">&times;</button>
+
+  <button class="viewer-button previous"
+          id="previous" aria-label="Previous image">
+    &#10094;
+  </button>
+
+  <button class="viewer-button next"
+          id="next" aria-label="Next image">
+    &#10095;
+  </button>
+
+  <div class="viewer-content">
+
+    <h3 class="viewer-title" id="viewerTitle"></h3>
+
+    <img class="large-image" id="largeImage" src="" alt="">
+
+    <p class="viewer-description" id="viewerDescription"></p>
+
+    <div class="viewer-count" id="viewerCount"></div>
+
+    <div class="thumbnails" id="thumbnails"></div>
+
+  </div>
+</div>
+
+<footer>
+  © 2026 Studio Klayla
+</footer>
+
+<script>
+
+/*
+  ARTWORK INFORMATION
+
+  Add your artwork details here.
+  Each artwork has one cover image and
+  can have several additional photographs.
+*/
+
+const artworks = [
+
+  {
+    title: "Artwork 1",
+    description: "A short description of this artwork.",
+
+    cover: "images/artwork1-cover.jpg",
+
+    images: [
+      "images/artwork1-cover.jpg",
+      "images/artwork1-view2.jpg",
+      "images/artwork1-view3.jpg"
+    ]
+  },
+
+  {
+    title: "Artwork 2",
+    description: "A short description of this artwork.",
+
+    cover: "images/artwork2-cover.jpg",
+
+    images: [
+      "images/artwork2-cover.jpg"
+    ]
+  }
+
+];
+
+/* DISPLAY THE GALLERY */
+
+const gallery = document.getElementById("artworkGallery");
+
+artworks.forEach((artwork, index) => {
+
+  const item = document.createElement("div");
+  item.className = "artwork";
+  item.tabIndex = 0;
+
+  item.innerHTML = `
+    <div class="cover">
+      <img src="${artwork.cover}"
+           alt="${artwork.title}">
+      <div class="description">
+        <h3>${artwork.title}</h3>
+        <p>${artwork.description}</p>
+      </div>
+    </div>
+
+    <div class="artwork-caption">
+      ${artwork.title}
+    </div>
+  `;
+
+  item.addEventListener("click", () => openArtwork(index));
+
+  item.addEventListener("keydown", event => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openArtwork(index);
+    }
+  });
+
+  gallery.appendChild(item);
+
+});
+
+/* IMAGE VIEWER */
+
+const lightbox = document.getElementById("lightbox");
+const largeImage = document.getElementById("largeImage");
+
+let currentArtwork = 0;
+let currentImage = 0;
+
+function openArtwork(index) {
+  currentArtwork = index;
+  currentImage = 0;
+
+  showImage();
+
+  lightbox.classList.add("active");
+}
+
+function showImage() {
+
+  const artwork = artworks[currentArtwork];
+  const image = artwork.images[currentImage];
+
+  largeImage.src = image;
+  largeImage.alt = artwork.title;
+
+  document.getElementById("viewerTitle").textContent =
+    artwork.title;
+
+  document.getElementById("viewerDescription").textContent =
+    artwork.description;
+
+  document.getElementById("viewerCount").textContent =
+    `${currentImage + 1} of ${artwork.images.length}`;
+
+  const thumbnails = document.getElementById("thumbnails");
+  thumbnails.innerHTML = "";
+
+  artwork.images.forEach((src, index) => {
+
+    const thumb = document.createElement("img");
+    thumb.src = src;
+    thumb.alt = `View ${index + 1}`;
+    thumb.className =
+      index === currentImage ? "selected" : "";
+
+    thumb.addEventListener("click", () => {
+      currentImage = index;
+      showImage();
+    });
+
+    thumbnails.appendChild(thumb);
+
+  });
+
+}
+
+function changeImage(direction) {
+
+  const artwork = artworks[currentArtwork];
+
+  currentImage =
+    (currentImage + direction + artwork.images.length)
+    % artwork.images.length;
+
+  showImage();
+}
+
+document.getElementById("previous").onclick = () =>
+  changeImage(-1);
+
+document.getElementById("next").onclick = () =>
+  changeImage(1);
+
+function closeViewer() {
+  lightbox.classList.remove("active");
+  largeImage.src = "";
+}
+
+document.getElementById("close").onclick = closeViewer;
+
+lightbox.addEventListener("click", event => {
+  if (event.target === lightbox) closeViewer();
+});
+
+document.addEventListener("keydown", event => {
+
+  if (!lightbox.classList.contains("active")) return;
+
+  if (event.key === "Escape") closeViewer();
+
+  if (event.key === "ArrowRight") changeImage(1);
+
+  if (event.key === "ArrowLeft") changeImage(-1);
+
+});
+
+</script>
+
+</body>
+</html>
